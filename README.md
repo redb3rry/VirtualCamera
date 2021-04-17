@@ -4,7 +4,7 @@ Project realized for Computer Graphics course at Politechnika Warszawska
 
 
 ## Lista zadań
-- [ ] Dodanie operowania na czworokątach
+- [x] Dodanie operowania na trójkątach
 - [ ] Implementacja algorytmu
     - [ ] Implementacja rysownika
         - [ ] Utworzenie tablicy płaszczyzn
