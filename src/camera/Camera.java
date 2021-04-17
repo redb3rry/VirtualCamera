@@ -50,7 +50,7 @@ public class Camera {
             Point3D c = shape.getPoints().get(2);
             a.setY(a.getY() + step);
             b.setY(b.getY() + step);
-            c.setY(b.getY() + step);
+            c.setY(c.getY() + step);
             projectTo2D();
         }
     }

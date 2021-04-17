@@ -46,6 +46,8 @@ public class Shape3D {
     }
 
     public double getZ(double x, double y) {
-        return (a*x + b*y - d)/(-1)*c;
+        setEquation();
+        //System.out.println(a +","+ b+","+ c +","+ d);
+        return (this.a*x + this.b*y - this.d)/((-1)*this.c);
     }
 }

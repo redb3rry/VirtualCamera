@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Shape2D {
     ArrayList<Point2D> points;
     Color color;
+    Boolean in = false;
 
     Shape3D parentShape;
 

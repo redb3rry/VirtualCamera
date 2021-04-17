@@ -69,6 +69,7 @@ public class Controller {
                     break;
             }
             draw();
+            newDraw();
         }
     }
 
@@ -81,11 +82,10 @@ public class Controller {
     private void draw() {
         prepareBackground();
         GraphicsContext gc = viewport.getGraphicsContext2D();
-        gc.setStroke(Color.YELLOW);
         gc.setLineWidth(1);
-        gc.beginPath();
         for(Shape2D shape : camera.getCreator().getShapes2D()){
             gc.setStroke(shape.color);
+            gc.beginPath();
             gc.moveTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
             gc.lineTo(shape.getPoints().get(1).getX(), shape.getPoints().get(1).getY());
 
@@ -94,11 +94,25 @@ public class Controller {
 
             gc.moveTo(shape.getPoints().get(2).getX(), shape.getPoints().get(2).getY());
             gc.lineTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
-            //System.out.println(shape.getPoints().get(0).getX());
-            //System.out.println(shape.getPoints());
-            //System.out.println(shape.getParentShape().getPoints());
             gc.stroke();
+            System.out.println(shape.getParentShape().getZ(0,0));
         }
-
+        gc.setStroke(Color.WHITE);
+        gc.beginPath();
+        gc.moveTo(400,390);
+        gc.lineTo(400,410);
+        gc.moveTo(390,400);
+        gc.lineTo(410,400);
+        gc.stroke();
+    }
+    private void newDraw(){
+//        prepareBackground();
+//        GraphicsContext gc = viewport.getGraphicsContext2D();
+//        gc.setLineWidth(1);
+        double y = 400;
+        camera.getCreator().sortLines();
+        for(Line2D line: camera.getCreator().getLines()){
+               System.out.println(line.doCross(y));
+        }
     }
 }
