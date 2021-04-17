@@ -88,12 +88,17 @@ public class Controller {
             gc.setStroke(shape.color);
             gc.moveTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
             gc.lineTo(shape.getPoints().get(1).getX(), shape.getPoints().get(1).getY());
+
+            gc.moveTo(shape.getPoints().get(1).getX(), shape.getPoints().get(1).getY());
             gc.lineTo(shape.getPoints().get(2).getX(), shape.getPoints().get(2).getY());
+
+            gc.moveTo(shape.getPoints().get(2).getX(), shape.getPoints().get(2).getY());
             gc.lineTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
             //System.out.println(shape.getPoints().get(0).getX());
             //System.out.println(shape.getPoints());
             //System.out.println(shape.getParentShape().getPoints());
+            gc.stroke();
         }
-        gc.stroke();
+
     }
 }
