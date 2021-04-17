@@ -7,8 +7,8 @@ Project realized for Computer Graphics course at Politechnika Warszawska
 - [x] Dodanie operowania na trójkątach
 - [ ] Implementacja algorytmu
     - [ ] Implementacja rysownika
-        - [ ] Utworzenie tablicy płaszczyzn
-        - [ ] Implementacja sortowania wielokątów
+        - [x] Utworzenie tablicy płaszczyzn
+        - [x] Implementacja sortowania wielokątów
         - [ ] Implementacja metody analizującej obraz
             - [ ] Przynależność odcinków do figur
                 - [ ] Brak przecięć
