@@ -72,10 +72,10 @@ public class Controller {
         }
     }
 
-    private void prepareBackground() {
+    private void prepareBackground(){
         GraphicsContext gc = viewport.getGraphicsContext2D();
-        gc.setFill(Color.BLUE);
-        gc.fillRect(0, 0, 800, 800);
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0,800,800);
     }
 
     private void draw() {
@@ -84,9 +84,15 @@ public class Controller {
         gc.setStroke(Color.YELLOW);
         gc.setLineWidth(1);
         gc.beginPath();
-        for (Line2D line : camera.getCreator().getLines2D()) {
-            gc.moveTo(line.getA().getX(), line.getA().getY());
-            gc.lineTo(line.getB().getX(), line.getB().getY());
+        for(Shape2D shape : camera.getCreator().getShapes2D()){
+            gc.setStroke(shape.color);
+            gc.moveTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
+            gc.lineTo(shape.getPoints().get(1).getX(), shape.getPoints().get(1).getY());
+            gc.lineTo(shape.getPoints().get(2).getX(), shape.getPoints().get(2).getY());
+            gc.lineTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
+            //System.out.println(shape.getPoints().get(0).getX());
+            //System.out.println(shape.getPoints());
+            //System.out.println(shape.getParentShape().getPoints());
         }
         gc.stroke();
     }
