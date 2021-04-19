@@ -5,14 +5,14 @@ Project realized for Computer Graphics course at Politechnika Warszawska
 
 ## Lista zadań
 - [x] Dodanie operowania na trójkątach
-- [ ] Implementacja algorytmu
-    - [ ] Implementacja rysownika
+- [x] Implementacja algorytmu
+    - [x] Implementacja rysownika
         - [x] Utworzenie tablicy płaszczyzn
         - [x] Implementacja sortowania wielokątów
-        - [ ] Implementacja metody analizującej obraz
-            - [ ] Przynależność odcinków do figur
-                - [ ] Brak przecięć
-                - [ ] Jedno przecięcie
-                - [ ] Wiele przecięć
-            - [ ] Rysowanie linii
+        - [x] Implementacja metody analizującej obraz
+            - [x] Przynależność odcinków do figur
+                - [x] Brak przecięć
+                - [x] Jedno przecięcie
+                - [x] Wiele przecięć
+            - [x] Rysowanie linii
         
