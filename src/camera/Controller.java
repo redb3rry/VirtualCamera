@@ -5,6 +5,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Controller {
     private Camera camera;
@@ -111,8 +116,28 @@ public class Controller {
 //        gc.setLineWidth(1);
         double y = 400;
         camera.getCreator().sortLines();
+        ArrayList<Pair> crosses = new ArrayList<>();
         for(Line2D line: camera.getCreator().getLines()){
-               System.out.println(line.doCross(y));
+               Pair<Boolean, Double> cross = line.doCross(y);
+               if(cross.getKey()){
+                   crosses.add(new Pair(line, cross.getValue()));
+               }
         }
+        Collections.sort(crosses, new Comparator<Pair>() {
+            @Override
+            public int compare(Pair o1, Pair o2) {
+                Double v1 = (Double) o1.getValue();
+                Double v2 = (Double) o2.getValue();
+                if(v1 > v2){
+                    return 1;
+                } else if( v1 < v2 ){
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        System.out.println(crosses);
+
     }
 }
