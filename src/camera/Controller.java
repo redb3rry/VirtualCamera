@@ -24,7 +24,7 @@ public class Controller {
         camera = new Camera("src/camera/config.txt");
         camera.projectTo2D();
         camera.moveToCenter();
-        draw();
+        newDraw();
     }
 
     @FXML
@@ -75,7 +75,6 @@ public class Controller {
                     camera.zoom(-10);
                     break;
             }
-//            draw();
             newDraw();
         }
     }
@@ -86,37 +85,11 @@ public class Controller {
         gc.fillRect(0, 0, 800, 800);
     }
 
-    private void draw() {
-        prepareBackground();
-        GraphicsContext gc = viewport.getGraphicsContext2D();
-        gc.setLineWidth(1);
-        for (Shape2D shape : camera.getCreator().getShapes2D()) {
-            gc.setStroke(shape.color);
-            gc.beginPath();
-            gc.moveTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
-            gc.lineTo(shape.getPoints().get(1).getX(), shape.getPoints().get(1).getY());
-
-            gc.moveTo(shape.getPoints().get(1).getX(), shape.getPoints().get(1).getY());
-            gc.lineTo(shape.getPoints().get(2).getX(), shape.getPoints().get(2).getY());
-
-            gc.moveTo(shape.getPoints().get(2).getX(), shape.getPoints().get(2).getY());
-            gc.lineTo(shape.getPoints().get(0).getX(), shape.getPoints().get(0).getY());
-            gc.stroke();
-            //System.out.println(shape.getParentShape().getZ(0, 0));
-        }
-        gc.setStroke(Color.WHITE);
-        gc.beginPath();
-        gc.moveTo(400, 390);
-        gc.lineTo(400, 410);
-        gc.moveTo(390, 400);
-        gc.lineTo(410, 400);
-        gc.stroke();
-    }
 
     private void newDraw() {
         prepareBackground();
         GraphicsContext gc = viewport.getGraphicsContext2D();
-        gc.setLineWidth(1);
+        gc.setLineWidth(2);
         for(double y = 801; y>-1; y--) {
             camera.getCreator().sortLines();
             ArrayList<Pair> crosses = new ArrayList<>();
@@ -140,8 +113,6 @@ public class Controller {
                     }
                 }
             });
-            //System.out.println(crosses);
-//            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             ArrayList<Shape2D> currentShapes = new ArrayList<>();
 
             for (int i = 0; i < crosses.size(); i++) {
@@ -156,40 +127,26 @@ public class Controller {
                 } else {
                     currentShapes.add(line.shape);
                 }
-
+                Shape2D shapeToColor = line.shape;
+                double nextX = (Double) crosses.get(i + 1).getValue();
                 if (currentShapes.size() == 1) {
-                    Shape2D shapeToColor = currentShapes.get(0);
-                    double nextX = (Double) crosses.get(i + 1).getValue();
-                    Color color = shapeToColor.color;
-                    gc.setStroke(color);
-                    gc.beginPath();
-                    gc.moveTo(x, y);
-                    gc.lineTo(nextX, y);
-                    gc.stroke();
+                    shapeToColor = currentShapes.get(0);
                 } else {
                     double minZ = Double.MAX_VALUE;
-                    Shape2D shapeToColor = line.shape;
-                    double nextX = (Double) crosses.get(i + 1).getValue();
                     for (Shape2D shape : currentShapes) {
                         shape.z = shape.getZ((x-400+nextX-400)/(2*camera.getFocalLen()),(y-400)/camera.getFocalLen());
-//                        System.out.println(((x)/(camera.getFocalLen())) + " " + (y/ camera.getFocalLen()));
-//                        System.out.println(x + " " + nextX);
-//                        System.out.println(shape.z + " " + shape.color);
                         if (shape.z < minZ) {
                             minZ = shape.z;
                             shapeToColor = shape;
                         }
                     }
-//                    System.out.println("###");
-//                    System.out.println(shapeToColor);
-//                    double nextX = (Double) crosses.get(i + 1).getValue();
-                    Color color = shapeToColor.color;
-                    gc.setStroke(color);
-                    gc.beginPath();
-                    gc.moveTo(x, y);
-                    gc.lineTo(nextX, y);
-                    gc.stroke();
                 }
+                Color color = shapeToColor.color;
+                gc.setStroke(color);
+                gc.beginPath();
+                gc.moveTo(x, y);
+                gc.lineTo(nextX, y);
+                gc.stroke();
             }
         }
     }
