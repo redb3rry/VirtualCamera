@@ -117,7 +117,7 @@ public class Controller {
         prepareBackground();
         GraphicsContext gc = viewport.getGraphicsContext2D();
         gc.setLineWidth(1);
-        for(double y = 800; y>0; y--) {
+        for(double y = 801; y>-1; y--) {
             camera.getCreator().sortLines();
             ArrayList<Pair> crosses = new ArrayList<>();
             for (Line2D line : camera.getCreator().getLines()) {
@@ -171,8 +171,9 @@ public class Controller {
                     Shape2D shapeToColor = line.shape;
                     double nextX = (Double) crosses.get(i + 1).getValue();
                     for (Shape2D shape : currentShapes) {
-                        shape.z = abs(shape.getZ((x)/ camera.getFocalLen(), (y)/ camera.getFocalLen()));
-//                        System.out.println((x/ camera.getFocalLen()) + " " + (y/ camera.getFocalLen()));
+                        shape.z = shape.getZ((x-400+nextX-400)/(2*camera.getFocalLen()),(y-400)/camera.getFocalLen());
+//                        System.out.println(((x)/(camera.getFocalLen())) + " " + (y/ camera.getFocalLen()));
+//                        System.out.println(x + " " + nextX);
 //                        System.out.println(shape.z + " " + shape.color);
                         if (shape.z < minZ) {
                             minZ = shape.z;
@@ -181,7 +182,7 @@ public class Controller {
                     }
 //                    System.out.println("###");
 //                    System.out.println(shapeToColor);
-                    //double nextX = (Double) crosses.get(i + 1).getValue();
+//                    double nextX = (Double) crosses.get(i + 1).getValue();
                     Color color = shapeToColor.color;
                     gc.setStroke(color);
                     gc.beginPath();
